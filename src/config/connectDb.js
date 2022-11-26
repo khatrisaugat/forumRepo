@@ -1,21 +1,22 @@
-const { MongoClient } = require("mongodb");
+const mongoose = require("mongoose");
 
 const { MONGO_DB_CONNECTION_STRING, MONGO_DB_NAME } = process.env;
 
-export const client = new MongoClient(MONGO_DB_CONNECTION_STRING);
-
 //connect db
-export const connectDb = async () => {
+const connectDb = async () => {
   try {
-    await client.connect();
-    console.log("Connected successfully to server");
-    return client.db(MONGO_DB_NAME);
+    await mongoose.connect(MONGO_DB_CONNECTION_STRING, {
+      useNewUrlParser: true,
+    });
+    console.log("MongoDB connected");
   } catch (err) {
     console.log(err.stack);
   }
 };
 
 //close db
-export const closeDb = async () => {
-  await client.close();
+const closeDb = async () => {
+  await mongoose.connection.close();
 };
+
+module.exports = { connectDb, closeDb };
