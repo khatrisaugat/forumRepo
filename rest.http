@@ -1,4 +1,5 @@
 @baseUrl=http://localhost:5000/api/users
+@token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODFhZGQyZTE5NGM1YmFmNGRjNGZjNiIsInVzZXJuYW1lIjoidGVzdCIsImlhdCI6MTY2OTU2MTg1NywiZXhwIjoxNzAxMTE4NzgzfQ.DRlLM-aL-cxOiqM8FKJ0ptAgPIz6b-A-iG1W4bQ1SJ8
 
 ### register the new user
 POST {{baseUrl}}/register
@@ -20,4 +21,10 @@ Content-Type: application/json
     "email": "test@gmail.com",
     "password": "test123"
 }
+###
+
+### get the user profile
+GET {{baseUrl}}/current
+Content-Type: application/json
+x-auth-token:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODFhZGQyZTE5NGM1YmFmNGRjNGZjNiIsInVzZXJuYW1lIjoidGVzdCIsImlhdCI6MTY2OTU2NDE0NCwiZXhwIjoxNzAxMTIxMDcwfQ.LKupTTgi4anzwAj9RqhdYVQ8FX9hPk0W2UuqI8fV07Y
 ###

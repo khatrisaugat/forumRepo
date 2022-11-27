@@ -15,4 +15,9 @@ router.post("/register", authControl.register_a_user);
 // @access Public
 router.post("/login", authControl.login_a_user);
 
+// @route GET api/users/current
+// @desc Return current user
+// @access Private
+router.get("/current", authControl.current_user);
+
 module.exports = router;

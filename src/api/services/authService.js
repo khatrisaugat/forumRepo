@@ -28,7 +28,7 @@ exports.find_user = async (email) => {
   try {
     const user = await User.findOne({
       email: email,
-    });
+    }).select("-password");
     return user;
   } catch (err) {
     console.log(err);
@@ -49,9 +49,19 @@ exports.compare_password = async (password, userPassword) => {
 exports.generate_token = (user) => {
   const payload = {
     id: user.id,
-    username: user.username,
+    email: user.email,
   };
   return jwt.sign(payload, process.env.JWT_SECRET, {
     expiresIn: 31556926, // 1 year in seconds
   });
+};
+
+exports.decode_token = (token) => {
+  try {
+    const newToken = token.replace("Bearer ", "");
+    console.log(jwt.verify(newToken, process.env.JWT_SECRET));
+    return jwt.verify(newToken, process.env.JWT_SECRET);
+  } catch (err) {
+    console.log(err);
+  }
 };

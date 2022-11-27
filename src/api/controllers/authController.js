@@ -63,12 +63,12 @@ exports.login_a_user = async (req, res) => {
       // JWT Payload
       const payload = {
         id: user.id,
-        username: user.username,
+        email: user.email,
       };
+      console.log(payload.email);
       // Sign token
       const token = authService.generate_token(payload);
       return res.json({
-        user: payload,
         success: true,
         token: "Bearer " + token,
       });
@@ -78,5 +78,28 @@ exports.login_a_user = async (req, res) => {
   } catch (err) {
     console.log(err);
     return res.json({ error: "Something went wrong" });
+  }
+};
+
+//current user
+exports.current_user = async (req, res) => {
+  const token = req.header("x-auth-token");
+  console.log(token);
+  if (!token) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+  try {
+    const decoded = authService.decode_token(token);
+    console.log(decoded);
+
+    // console.log(decoded.payload);
+    const user = await authService.find_user(decoded.email);
+    if (!user) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    return res.json(user);
+  } catch (err) {
+    console.log(err);
+    return res.status(401).json({ error: "Unauthorized" });
   }
 };
