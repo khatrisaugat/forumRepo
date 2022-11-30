@@ -3,7 +3,7 @@ const express = require("express");
 const passport = require("passport");
 const router = require("./api/routes");
 // const router = routes.router;
-console.log("router", router);
+
 const app = express();
 const { PORT } = process.env;
 
@@ -17,7 +17,11 @@ app.use(passport.initialize());
 // Passport config
 require("./config/passport")(passport);
 // Routes
-app.use("/api/users", router);
+// app.use("/api/users", router);
+// console.log("router", router);
+app.use("/api", router);
+console.log("router", router);
+
 app.listen(PORT, (err) => {
   if (err) console.log(err);
   console.log(`Server is running on port ${PORT}`);

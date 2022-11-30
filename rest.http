@@ -1,8 +1,9 @@
-@baseUrl=http://localhost:5000/api/users
+@baseUrl=http://localhost:5000/api
+@userUrl=http://localhost:5000/api/users
 @token=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODFhZGQyZTE5NGM1YmFmNGRjNGZjNiIsInVzZXJuYW1lIjoidGVzdCIsImlhdCI6MTY2OTU2MTg1NywiZXhwIjoxNzAxMTE4NzgzfQ.DRlLM-aL-cxOiqM8FKJ0ptAgPIz6b-A-iG1W4bQ1SJ8
 
 ### register the new user
-POST {{baseUrl}}/register
+POST {{userUrl}}/register
 Content-Type: application/json
 
 {
@@ -14,7 +15,7 @@ Content-Type: application/json
 ###
 
 ### login the user
-POST {{baseUrl}}/login
+POST {{userUrl}}/login
 Content-Type: application/json
 
 {
@@ -24,7 +25,17 @@ Content-Type: application/json
 ###
 
 ### get the user profile
-GET {{baseUrl}}/current
+GET {{userUrl}}/current
 Content-Type: application/json
-x-auth-token:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODFhZGQyZTE5NGM1YmFmNGRjNGZjNiIsInVzZXJuYW1lIjoidGVzdCIsImlhdCI6MTY2OTU2NDE0NCwiZXhwIjoxNzAxMTIxMDcwfQ.LKupTTgi4anzwAj9RqhdYVQ8FX9hPk0W2UuqI8fV07Y
+x-auth-token: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODFhZGQyZTE5NGM1YmFmNGRjNGZjNiIsImVtYWlsIjoidGVzdEBnbWFpbC5jb20iLCJpYXQiOjE2Njk3OTY5ODgsImV4cCI6MTcwMTM1MzkxNH0.gMMVSBbRePqypkQwtvG74mYRwFRZrIDOd4Nvh7KTS0I
+###
+
+### create a thread
+POST {{baseUrl}}/threads
+Content-Type: application/json
+x-auth-token: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODFhZGQyZTE5NGM1YmFmNGRjNGZjNiIsImVtYWlsIjoidGVzdEBnbWFpbC5jb20iLCJpYXQiOjE2Njk3OTY5ODgsImV4cCI6MTcwMTM1MzkxNH0.gMMVSBbRePqypkQwtvG74mYRwFRZrIDOd4Nvh7KTS0I
+
+{
+    "title": "test thread 1"
+}
 ###

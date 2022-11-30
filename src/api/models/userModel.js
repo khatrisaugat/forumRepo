@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
-const { MONGO_DB_NAME } = process.env;
 const Schema = mongoose.Schema;
 // Create Schema
 const UserSchema = new Schema({

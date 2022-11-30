@@ -65,3 +65,26 @@ exports.decode_token = (token) => {
     console.log(err);
   }
 };
+
+exports.verify_token = async (req, res, next) => {
+  const self = require("./authService");
+  const token = req.header("x-auth-token");
+  console.log(token);
+  if (!token) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+  try {
+    const decoded = self.decode_token(token);
+    console.log(decoded);
+
+    // console.log(decoded.payload);
+    const user = await self.find_user(decoded.email);
+    if (!user) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    return user;
+  } catch (err) {
+    console.log(err);
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+};
