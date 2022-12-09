@@ -6,7 +6,6 @@ const threadSchema = new Schema(
       type: String,
       required: true,
     },
-    posts: [{ type: Schema.Types.ObjectId, ref: "posts" }],
     user: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
   },
   { timestamps: true }

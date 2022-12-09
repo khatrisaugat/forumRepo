@@ -11,17 +11,16 @@ const postSchema = new Schema(
       required: true,
     },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
-    comments: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "comments",
-      },
-    ],
+    thread: { type: mongoose.Schema.Types.ObjectId, ref: "threads" },
     tags: [
       {
         type: String,
       },
     ],
+    question: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
